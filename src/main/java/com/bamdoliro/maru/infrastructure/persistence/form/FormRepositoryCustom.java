@@ -3,6 +3,7 @@ package com.bamdoliro.maru.infrastructure.persistence.form;
 import com.bamdoliro.maru.domain.form.domain.Form;
 import com.bamdoliro.maru.domain.form.domain.type.FormStatus;
 import com.bamdoliro.maru.infrastructure.persistence.form.vo.FormUrlVo;
+import com.querydsl.core.Tuple;
 
 import java.util.List;
 
@@ -15,4 +16,5 @@ public interface FormRepositoryCustom {
     List<Form> findSecondRoundForm();
     List<Form> findByFormIdList(List<Long> idList);
     List<FormUrlVo> findFormUrlByFormIdList(List<Long> idList);
+    List<Tuple> findTypeAndCountGroupByType();
 }
