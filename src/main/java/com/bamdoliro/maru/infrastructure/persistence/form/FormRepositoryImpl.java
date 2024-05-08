@@ -3,9 +3,10 @@ package com.bamdoliro.maru.infrastructure.persistence.form;
 import com.bamdoliro.maru.domain.form.domain.Form;
 import com.bamdoliro.maru.domain.form.domain.type.FormStatus;
 import com.bamdoliro.maru.domain.form.domain.type.FormType;
+import com.bamdoliro.maru.infrastructure.persistence.form.vo.AcceptanceRateVo;
 import com.bamdoliro.maru.infrastructure.persistence.form.vo.FormUrlVo;
+import com.bamdoliro.maru.infrastructure.persistence.form.vo.QAcceptanceRateVo;
 import com.bamdoliro.maru.infrastructure.persistence.form.vo.QFormUrlVo;
-import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -122,8 +123,11 @@ public class FormRepositoryImpl implements FormRepositoryCustom {
     }
 
     @Override
-    public List<Tuple> findTypeAndCountGroupByType() {
-        return queryFactory.select(form.type, form.count())
+    public List<AcceptanceRateVo> findTypeAndCountGroupByType() {
+        return queryFactory
+                .select(new QAcceptanceRateVo(
+                        form.type, form.count()
+                ))
                 .from(form)
                 .groupBy(form.type)
                 .fetch();
